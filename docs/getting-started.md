@@ -5,11 +5,11 @@ Use this guide to orient around Tigrcorn documentation.
 ## Operator commands
 
 ```bash
-npmctl install
-npmctl check
-npmctl build
-npmctl dns:plan
-npmctl deploy:dry-run
+npm ci
+npm run check
+npm run build
+npm run dns:plan
+npm run proxy:plan
 ```
 
 ## Deployment model

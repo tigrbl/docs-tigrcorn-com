@@ -4,15 +4,15 @@ Standalone ZDX documentation repository for [docs.tigrcorn.com](https://docs.tig
 
 ## Commands
 
-- `npmctl install`
-- `npmctl check`
-- `npmctl build`
-- `npmctl docker:build`
-- `npmctl dns:plan`
-- `npmctl deploy:dry-run`
+- `npm ci`
+- `npm run check`
+- `npm run build`
+- `npm run docker:build`
+- `npm run dns:plan` (uses PyPI `npmctl` plus `npmctl-namecheap`)
+- `npm run proxy:plan` (uses PyPI `npmctl`)
 
-The local npm scripts mirror those npmctl lifecycle commands for CI and Docker workers.
+The GitHub workflows install `npmctl` and `npmctl-namecheap` from PyPI, then use `npmctl validate`, `npmctl plan`, and `npmctl apply` against `desired-state/`.
 
 ## Deployment
 
-This repo deploys as the `docs-tigrcorn-com` self-hosted Docker service. DNS is managed through Namecheap for the `tigrcorn.com` zone and is declared in `site.manifest.json`.
+This repo deploys as the `docs-tigrcorn-com` self-hosted Docker service. DNS is managed through the PyPI `npmctl-namecheap` provider for the `tigrcorn.com` zone and is declared in `desired-state/dns.yaml`.
