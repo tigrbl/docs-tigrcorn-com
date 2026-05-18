@@ -58,10 +58,13 @@ jobs:
       - name: Validate npmctl proxy desired state
         run: npmctl validate desired-state/proxy.yaml
       - name: Build site image
-        run: docker compose -f docker-compose.yaml build docs-tigrcorn-com || docker-compose -f docker-compose.yaml build docs-tigrcorn-com
+        run: docker-compose -f docker-compose.yaml build docs-tigrcorn-com
       - name: Restart site container
         run: |
-          docker compose -f docker-compose.yaml up -d --build --force-recreate --no-deps docs-tigrcorn-com || docker-compose -f docker-compose.yaml up -d --build --force-recreate --no-deps docs-tigrcorn-com
+          docker-compose -f docker-compose.yaml stop docs-tigrcorn-com || true
+          docker-compose -f docker-compose.yaml rm -f docs-tigrcorn-com || true
+          docker rm -f docs-tigrcorn-com || true
+          docker-compose -f docker-compose.yaml up -d --no-build --force-recreate --no-deps docs-tigrcorn-com
       - name: Check Nginx Proxy Manager API schema
         continue-on-error: true
         run: npmctl schema check
