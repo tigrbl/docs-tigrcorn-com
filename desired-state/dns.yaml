@@ -4,11 +4,11 @@ schemaVersion: 2
 dns_records:
   - provider: namecheap
     zone: tigrcorn.com
-    type: CNAME
+    type: A
     name: "docs"
-    value: nginx.bz23.xyz
+    value: __SITE_SERVER_IP__
     ttl: 300
     meta:
       managed_by: npmctl
       owner: docs-tigrcorn-com
-      resource_id: dns.docs-tigrcorn-com.docs-cname
+      resource_id: dns.docs-tigrcorn-com.docs-a
