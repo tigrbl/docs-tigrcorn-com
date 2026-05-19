@@ -117,6 +117,12 @@ def main() -> int:
             if record_type not in VALID_DNS_TYPES:
                 raise SystemExit(f"desired record is not a DNS record: {record_type}")
             name = host_name(record["name"], zone)
+            if record_type == "CNAME":
+                for key in list(by_key):
+                    if key[0] == name:
+                        by_key.pop(key)
+            else:
+                by_key.pop((name, "CNAME"), None)
             by_key[(name, record_type)] = {
                 "Name": name,
                 "Type": record_type,
